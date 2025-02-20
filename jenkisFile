@@ -30,11 +30,11 @@ pipeline {
  }
 
  }
- stage('MVN SONARQUBE'){
+stage('MVN SONARQUBE') {
     steps {
-      sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=Admin@@11111 -Dmaven.test.skip=true';
+        sh 'mvn sonar:sonar -Dsonar.token=sonar-token-12345 -Dmaven.test.skip=true'
     }
- }
+}
 
  }
 
