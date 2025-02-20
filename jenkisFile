@@ -30,12 +30,10 @@ pipeline {
  }
 
  }
-stage('MVN SONARQUBE') {
-    steps {
-        sh 'mvn sonar:sonar -Dsonar.token=sonar-token-12345 -Dmaven.test.skip=true'
-    }
-}
-
+stage('SonarQube Analysis') {
+            steps {
+                sh 'mvn sonar:scanner -Dsonar.login=admin -Dsonar.password=sonar -Dmaven.test.skip=true';
+            }
  }
 
 }
