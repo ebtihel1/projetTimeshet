@@ -1,40 +1,34 @@
 pipeline {
+    agent any
 
- agent any
-
- tools { 
+    tools { 
         jdk 'JAVA_HOME' 
         maven 'M2_HOME' 
     }
 
- stages {
+    stages {
+        stage('GIT') {
+            steps {
+                git branch: 'main', url: 'https://github.com/saifGt/projetTimeshet.git'
+            }
+        }
 
- stage('GIT') {
+        stage('Compile Stage') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
 
-           steps {
-
-               git branch: 'main',
-
-               url: ' https://github.com/saifGt/projetTimeshet.git'
-
-          }
-
-     }
-
- stage ('Compile Stage') {
-
- steps {
-
- sh 'mvn clean compile'
-
- }
-
- }
-stage('SonarQube Analysis') {
+        stage('SonarQube Analysis') {
             steps {
                 sh 'mvn sonar:sonar -Dsonar.token=squ_a00c5e4f4a5e7c215ec4200efcd5e854ef328705 -Dmaven.test.skip=true'
-      }
-}
+            }
+        }
 
-}
+        stage('Deploy to Nexus') {
+            steps {
+                sh 'mvn deploy -DskipTests'
+            }
+        }
+    }
 }
