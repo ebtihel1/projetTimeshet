@@ -25,11 +25,11 @@ pipeline {
             }
         }
 
-        stage('Deploy to Nexus') {
+       /* stage('Deploy to Nexus') {
             steps {
                 sh 'mvn deploy -DskipTests'
             }
-        }
+        }*/
         stage('docker image Stage') {
                       steps {
                           sh 'docker build -t timesheet:1.0.0 https://github.com/saifGt/projetTimeshet.git'
