@@ -32,10 +32,10 @@ pipeline {
         }*/
         stage('docker image Stage') {
                       steps {
-                          sh ' ' '
+                          sh """
                      docker login -u saifmed -p Saif@@111
                     docker push saifmed/timesheet-devops:1.0.0
-                     ' ' '
+                     """
             }
         }
     }
